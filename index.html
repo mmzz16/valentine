@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A handmade gift celebrating our anniversary and love">
+    <title>For You ✨</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Crimson+Text:ital@0;1&family=Nunito:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Starry Background Canvas -->
+    <canvas id="starry-canvas"></canvas>
+
+    <!-- Click Sparkles Container -->
+    <div id="sparkles-container"></div>
+
+    <!-- Page Container -->
+    <div id="app">
+
+        <!-- Welcome Page -->
+        <section id="welcome-page" class="page active">
+            <div class="page-content">
+                <div class="welcome-icon">✨</div>
+                <h1 class="welcome-title fade-in">Hello, my ውዲቱ</h1>
+                <p class="welcome-text fade-in delay-1">
+                    I made something small for you.<br>
+                    A little handmade gift from my heart to yours.
+                </p>
+                <p class="welcome-subtext fade-in delay-2">
+                    Click anywhere to see some magic ✨
+                </p>
+                <button class="continue-btn fade-in delay-3" onclick="goToPage('anniversary-page')">
+                    <span>Continue</span>
+                    <span class="btn-sparkle">💫</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Anniversary Page -->
+        <section id="anniversary-page" class="page">
+            <div class="page-content anniversary-content-long">
+                <div class="anniversary-hearts">💕</div>
+                <h1 class="anniversary-title">Happy Anniversary</h1>
+
+                <!-- Our Photo -->
+                <div class="photo-frame">
+                    <div class="photo-display">
+                        <img src="img.jpg" alt="Us">
+                    </div>
+                </div>
+
+                <div class="anniversary-message scrollable">
+                    <p class="fade-in-line">
+                        Today feels like a quiet marker in time - a moment to slow down and notice how naturally our
+                        lives
+                        have learned to move together. Happy anniversary, my love. What we share isn't loud or dramatic;
+                        it's steady, warm, and deeply real. Being with you has changed the way the world feels to me,
+                        like everything carries a little more color, a little more meaning, simply because you're in it.
+                    </p>
+                    <p class="fade-in-line">
+                        I think about the beginning often - how nervous I was, how my hands betrayed me before my heart
+                        did, spilling tea on our first date while trying to act calm. I remember sitting there,
+                        pretending to listen while actually just staring at you, admiring the way you existed so
+                        effortlessly in front of me. That moment still makes me smile, because somehow, even in my
+                        clumsiness, something honest started forming. Loving you didn't happen all at once - it unfolded
+                        slowly, layer by layer, until staying felt like the only option.
+                    </p>
+                    <p class="fade-in-line">
+                        Being with you has taught me what peace really feels like. The way hugging you calms me, how
+                        everything inside me settles the moment I'm close to you - it's something I can't explain, only
+                        feel. Your presence quiets the noise in my head. Your smile alone can change the direction of my
+                        entire day, like light breaking through when I didn't even realize it was cloudy.
+                    </p>
+                    <p class="fade-in-line">
+                        I love you in the simplest, most human ways. I love kissing you, stealing moments when the world
+                        isn't watching. I love taking pictures of you - even though you don't like most of them -
+                        because to
+                        me, every one of them holds something I don't want to forget. They're all my favorite. Each
+                        photo feels like proof of how beautiful you are, not just to look at, but to love.
+                    </p>
+                    <p class="fade-in-line">
+                        What makes us special to me is how grounded we are. Our love isn't about perfection; it's about
+                        effort, honesty, and choosing each other on ordinary days. You care deeply, you listen fully,
+                        and you give so much of yourself to the people around you. Being with you has made me softer,
+                        more present, more aware of what truly matters.
+                    </p>
+                    <p class="fade-in-line highlight">
+                        So today, I'm celebrating us - the memories we've created, the comfort we've found in each
+                        other,
+                        the quiet strength of what we're building. I'm grateful for you in ways I don't always know how
+                        to say. I choose you, clearly and intentionally, today and every day that follows. If love is a
+                        kind of art,then what we have feels like something still being painted - honest, imperfect, and
+                        alive. And if it has a rhythm, it's steady and true, always bringing me back to you.
+                    </p>
+                    <p class="fade-in-line highlight">
+                        I love you so much my ውዲቱ❤️
+                        Always💕
+                    </p>
+                </div>
+
+                <button class="continue-btn" onclick="goToPage('valentine-page')">
+                    <span>One more thing...</span>
+                    <span class="btn-sparkle">�</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Valentine Page -->
+        <section id="valentine-page" class="page">
+            <div class="page-content valentine-content">
+                <div id="valentine-question" class="valentine-question-container">
+                    <div class="valentine-heart">💖</div>
+                    <h1 class="valentine-title">Will you be my Valentine?</h1>
+                    <p class="valentine-subtext">I have to ask, just to be sure... 🥺</p>
+                    <div class="valentine-buttons">
+                        <button class="valentine-btn yes-btn" onclick="sayYes()">
+                            Yes! 💕
+                        </button>
+                        <button class="valentine-btn no-btn" id="no-btn">
+                            Hmm, let me think...
+                        </button>
+                    </div>
+                </div>
+
+                <div id="celebration" class="celebration-container hidden">
+                    <div class="celebration-content">
+                        <div class="celebration-hearts">
+                            <span>💖</span><span>💕</span><span>💗</span><span>💝</span><span>💖</span>
+                        </div>
+                        <h1 class="celebration-title">YAY! 🎉</h1>
+                        <p class="celebration-text">
+                            You just made me the happiest person in the world!
+                        </p>
+                        <p class="celebration-message">
+                            I love you more than all the stars in the sky ✨
+                        </p>
+                        <button class="continue-btn celebration-game-btn" onclick="goToPage('game-page')">
+                            <span>Let's play a game! 🎮</span>
+                            <span class="btn-sparkle">�</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Page - Love Memory Match -->
+        <section id="game-page" class="page">
+            <div class="page-content game-content">
+                <h1 class="game-title">Love Memory Match �</h1>
+                <p class="game-subtitle">Find all the matching pairs!</p>
+
+                <div class="game-stats">
+                    <span class="moves-counter">Moves: <span id="moves">0</span></span>
+                    <span class="pairs-counter">Pairs: <span id="pairs">0</span>/6</span>
+                </div>
+
+                <div class="memory-game" id="memory-game">
+                    <!-- Cards will be generated by JavaScript -->
+                </div>
+
+                <div id="game-win" class="game-win hidden">
+                    <div class="win-content">
+                        <div class="win-hearts">💖✨💕✨💖</div>
+                        <h2 class="win-title">You did it! 🎉</h2>
+                        <p class="win-message">Just like finding matches in this game, we found each other 💕</p>
+                        <button class="continue-btn" onclick="resetGame()">
+                            <span>Play Again</span>
+                            <span class="btn-sparkle">🔄</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="game-footer">
+                    <p class="game-love-note">Every match reminds me of us 💫</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Confetti Container -->
+    <div id="confetti-container"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

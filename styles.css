@@ -1,0 +1,963 @@
+/* ===================================
+   DESIGN SYSTEM - Van Gogh Inspired
+   =================================== */
+
+:root {
+    /* Colors - Starry Night Palette */
+    --bg-primary: #0a1628;
+    --bg-secondary: #1a2744;
+    --bg-tertiary: #0d1e38;
+    --accent-gold: #ffd54f;
+    --accent-gold-soft: #ffecb3;
+    --accent-rose: #e8a4b8;
+    --accent-rose-soft: #f8d7e0;
+    --text-primary: #f5f5f5;
+    --text-secondary: #b8c5d6;
+    --star-white: #fff8e1;
+    --star-glow: rgba(255, 213, 79, 0.6);
+
+    /* Typography */
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Nunito', sans-serif;
+    --font-poem: 'Crimson Text', serif;
+
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --spacing-2xl: 5rem;
+
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.4s ease;
+    --transition-slow: 0.8s ease;
+    --transition-dreamy: 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===================================
+   RESET & BASE STYLES
+   =================================== */
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* ===================================
+   STARRY BACKGROUND CANVAS
+   =================================== */
+
+#starry-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* ===================================
+   SPARKLES CONTAINER
+   =================================== */
+
+#sparkles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.sparkle {
+    position: absolute;
+    font-size: 1.5rem;
+    animation: sparkle-float 2s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes sparkle-float {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(0deg);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-100px) scale(0.5) rotate(180deg);
+    }
+}
+
+/* ===================================
+   APP CONTAINER
+   =================================== */
+
+#app {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+}
+
+/* ===================================
+   PAGE STYLES
+   =================================== */
+
+.page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-dreamy), visibility var(--transition-dreamy);
+    padding: var(--spacing-lg);
+}
+
+.page.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.page-content {
+    max-width: 600px;
+    text-align: center;
+    padding: var(--spacing-xl);
+}
+
+/* ===================================
+   WELCOME PAGE
+   =================================== */
+
+.welcome-icon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-lg);
+    animation: gentle-float 3s ease-in-out infinite;
+}
+
+.welcome-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 400;
+    color: var(--accent-gold-soft);
+    margin-bottom: var(--spacing-lg);
+    text-shadow: 0 0 40px var(--star-glow);
+}
+
+.welcome-text {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.8;
+}
+
+.welcome-subtext {
+    font-size: 1rem;
+    color: var(--accent-rose-soft);
+    margin-bottom: var(--spacing-xl);
+    opacity: 0.9;
+}
+
+/* ===================================
+   CONTINUE BUTTON
+   =================================== */
+
+.continue-btn {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+    border: 2px solid var(--accent-gold);
+    color: var(--accent-gold-soft);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    box-shadow: 0 0 20px rgba(255, 213, 79, 0.2);
+}
+
+.continue-btn:hover {
+    background: linear-gradient(135deg, var(--accent-gold), #ffb300);
+    color: var(--bg-primary);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 213, 79, 0.4);
+}
+
+.continue-btn:active {
+    transform: translateY(-1px);
+}
+
+.btn-sparkle {
+    animation: gentle-rotate 2s linear infinite;
+}
+
+/* ===================================
+   ANNIVERSARY PAGE
+   =================================== */
+
+.anniversary-hearts {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+.anniversary-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 7vw, 3.5rem);
+    font-weight: 600;
+    color: var(--accent-rose-soft);
+    margin-bottom: var(--spacing-lg);
+    text-shadow: 0 0 30px rgba(232, 164, 184, 0.4);
+}
+
+/* Long anniversary content - scrollable */
+.anniversary-content-long {
+    max-width: 700px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: var(--spacing-lg);
+}
+
+.anniversary-content-long::-webkit-scrollbar {
+    width: 6px;
+}
+
+.anniversary-content-long::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+    border-radius: 3px;
+}
+
+.anniversary-content-long::-webkit-scrollbar-thumb {
+    background: var(--accent-gold);
+    border-radius: 3px;
+}
+
+.anniversary-message {
+    margin-bottom: var(--spacing-lg);
+}
+
+.anniversary-message.scrollable {
+    text-align: left;
+}
+
+.anniversary-message p {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+    opacity: 0;
+    transform: translateY(20px);
+    line-height: 1.8;
+}
+
+.anniversary-message p.visible {
+    animation: fade-in-up 0.8s ease forwards;
+}
+
+.anniversary-message p.highlight {
+    color: var(--accent-gold-soft);
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-align: center;
+    margin-top: var(--spacing-lg);
+}
+
+/* Poem Transition Text */
+.poem-transition {
+    font-family: var(--font-poem);
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--accent-rose-soft);
+    margin: var(--spacing-lg) 0;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.poem-transition.visible {
+    animation: fade-in-up 0.8s ease forwards;
+}
+
+/* ===================================
+   PHOTO FRAMES
+   =================================== */
+
+.photo-frame {
+    margin: var(--spacing-lg) auto;
+    max-width: 280px;
+}
+
+.photo-placeholder {
+    width: 100%;
+    aspect-ratio: 1;
+    border: 3px dashed var(--accent-gold);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    background: rgba(255, 213, 79, 0.05);
+    overflow: hidden;
+    position: relative;
+}
+
+.photo-placeholder:hover {
+    border-color: var(--accent-rose);
+    background: rgba(232, 164, 184, 0.1);
+    transform: scale(1.02);
+}
+
+.photo-placeholder.has-photo {
+    border-style: solid;
+    border-color: var(--accent-rose);
+}
+
+/* Photo display - for embedded images */
+.photo-display {
+    width: 100%;
+    aspect-ratio: 1;
+    border: 4px solid var(--accent-rose);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    box-shadow:
+        0 0 20px rgba(232, 164, 184, 0.3),
+        0 0 40px rgba(255, 213, 79, 0.15);
+    animation: photo-glow 3s ease-in-out infinite alternate;
+}
+
+.photo-display img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-normal);
+}
+
+.photo-display:hover img {
+    transform: scale(1.05);
+}
+
+@keyframes photo-glow {
+    from {
+        box-shadow:
+            0 0 20px rgba(232, 164, 184, 0.3),
+            0 0 40px rgba(255, 213, 79, 0.15);
+    }
+
+    to {
+        box-shadow:
+            0 0 30px rgba(232, 164, 184, 0.5),
+            0 0 50px rgba(255, 213, 79, 0.25);
+    }
+}
+
+.photo-icon {
+    font-size: 3rem;
+    opacity: 0.7;
+}
+
+.photo-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
+
+.photo-placeholder img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 17px;
+}
+
+/* Optional: Multiple photo layout */
+.photo-gallery {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: var(--spacing-lg) 0;
+}
+
+.photo-gallery .photo-frame {
+    width: 150px;
+    margin: 0;
+}
+
+.photo-gallery .photo-placeholder {
+    aspect-ratio: 1;
+}
+
+/* ===================================
+   POETRY PAGE
+   =================================== */
+
+.poem-content {
+    max-width: 700px;
+}
+
+.poem-title {
+    font-family: var(--font-poem);
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    font-style: italic;
+    color: var(--accent-gold-soft);
+    margin-bottom: var(--spacing-xl);
+    text-shadow: 0 0 25px var(--star-glow);
+}
+
+.poem-body {
+    margin-bottom: var(--spacing-xl);
+}
+
+.poem-line {
+    font-family: var(--font-poem);
+    font-size: clamp(1.1rem, 3vw, 1.35rem);
+    color: var(--text-primary);
+    line-height: 2;
+    opacity: 0;
+    transform: translateY(15px);
+    margin-bottom: var(--spacing-xs);
+}
+
+.poem-line.visible {
+    animation: poem-fade 1s ease forwards;
+}
+
+.poem-line.stanza-break {
+    margin-top: var(--spacing-lg);
+}
+
+@keyframes poem-fade {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===================================
+   VALENTINE PAGE
+   =================================== */
+
+.valentine-content {
+    max-width: 500px;
+}
+
+.valentine-question-container {
+    transition: opacity var(--transition-slow);
+}
+
+.valentine-question-container.hidden {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+}
+
+.valentine-heart {
+    font-size: 5rem;
+    margin-bottom: var(--spacing-md);
+    animation: heartbeat 1s ease-in-out infinite;
+}
+
+.valentine-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 6vw, 3rem);
+    font-weight: 600;
+    color: var(--accent-rose-soft);
+    margin-bottom: var(--spacing-md);
+    text-shadow: 0 0 30px rgba(232, 164, 184, 0.4);
+}
+
+.valentine-subtext {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xl);
+}
+
+.valentine-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    align-items: center;
+}
+
+.valentine-btn {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    padding: var(--spacing-sm) var(--spacing-xl);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    min-width: 250px;
+}
+
+.yes-btn {
+    background: linear-gradient(135deg, var(--accent-rose), #d4849a);
+    border: none;
+    color: white;
+    box-shadow: 0 5px 25px rgba(232, 164, 184, 0.4);
+}
+
+.yes-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 10px 35px rgba(232, 164, 184, 0.6);
+}
+
+.no-btn {
+    background: transparent;
+    border: 2px solid var(--text-secondary);
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
+}
+
+.no-btn:hover {
+    border-color: var(--accent-gold);
+    color: var(--accent-gold);
+}
+
+/* ===================================
+   CELEBRATION
+   =================================== */
+
+.celebration-container {
+    transition: opacity var(--transition-slow);
+}
+
+.celebration-container.hidden {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+}
+
+.celebration-content {
+    animation: celebration-pop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes celebration-pop {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.celebration-hearts {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+}
+
+.celebration-hearts span {
+    animation: heart-dance 0.5s ease infinite alternate;
+}
+
+.celebration-hearts span:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.celebration-hearts span:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.celebration-hearts span:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.celebration-hearts span:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+@keyframes heart-dance {
+    from {
+        transform: translateY(0) rotate(-10deg);
+    }
+
+    to {
+        transform: translateY(-10px) rotate(10deg);
+    }
+}
+
+.celebration-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 10vw, 5rem);
+    color: var(--accent-gold);
+    margin-bottom: var(--spacing-md);
+    text-shadow: 0 0 40px var(--star-glow);
+}
+
+.celebration-text {
+    font-size: 1.3rem;
+    color: var(--accent-rose-soft);
+    margin-bottom: var(--spacing-md);
+}
+
+.celebration-message {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xl);
+    font-style: italic;
+}
+
+.celebration-signature {
+    font-family: var(--font-poem);
+    font-size: 1.5rem;
+    color: var(--accent-gold-soft);
+}
+
+/* ===================================
+   CONFETTI CONTAINER
+   =================================== */
+
+#confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 200;
+    overflow: hidden;
+}
+
+.confetti {
+    position: absolute;
+    top: -20px;
+    animation: confetti-fall linear forwards;
+}
+
+@keyframes confetti-fall {
+    to {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* ===================================
+   ANIMATIONS
+   =================================== */
+
+@keyframes gentle-float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes gentle-rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+}
+
+@keyframes fade-in-up {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Fade in delays for welcome page */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fade-in-up 0.8s ease forwards;
+}
+
+.delay-1 {
+    animation-delay: 0.3s;
+}
+
+.delay-2 {
+    animation-delay: 0.6s;
+}
+
+.delay-3 {
+    animation-delay: 0.9s;
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+   =================================== */
+
+@media (max-width: 600px) {
+    .page-content {
+        padding: var(--spacing-lg) var(--spacing-md);
+    }
+
+    .valentine-buttons {
+        width: 100%;
+    }
+
+    .valentine-btn {
+        min-width: 100%;
+        max-width: 280px;
+    }
+
+    .celebration-hearts {
+        font-size: 2rem;
+    }
+
+    .memory-game {
+        gap: 8px !important;
+    }
+
+    .memory-card {
+        width: 70px !important;
+        height: 70px !important;
+    }
+}
+
+/* ===================================
+   GAME PAGE - LOVE MEMORY MATCH
+   =================================== */
+
+.game-content {
+    max-width: 500px;
+}
+
+.game-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 6vw, 2.8rem);
+    color: var(--accent-rose-soft);
+    margin-bottom: var(--spacing-sm);
+    text-shadow: 0 0 30px rgba(232, 164, 184, 0.4);
+}
+
+.game-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-lg);
+}
+
+.game-stats {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+    font-size: 1rem;
+    color: var(--accent-gold-soft);
+}
+
+.moves-counter,
+.pairs-counter {
+    background: rgba(255, 213, 79, 0.1);
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 213, 79, 0.3);
+}
+
+/* Memory Game Grid */
+.memory-game {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    max-width: 380px;
+    margin: 0 auto var(--spacing-lg);
+}
+
+/* Memory Card */
+.memory-card {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+}
+
+.memory-card.flipped {
+    transform: rotateY(180deg);
+}
+
+.memory-card.matched {
+    animation: matched-bounce 0.5s ease;
+}
+
+@keyframes matched-bounce {
+
+    0%,
+    100% {
+        transform: rotateY(180deg) scale(1);
+    }
+
+    50% {
+        transform: rotateY(180deg) scale(1.1);
+    }
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.card-front {
+    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+    border: 2px solid var(--accent-gold);
+    box-shadow: 0 0 15px rgba(255, 213, 79, 0.2);
+}
+
+.card-front::after {
+    content: '💫';
+    font-size: 1.5rem;
+}
+
+.card-back {
+    background: linear-gradient(135deg, var(--accent-rose), #d4849a);
+    border: 2px solid var(--accent-rose-soft);
+    transform: rotateY(180deg);
+    box-shadow: 0 0 20px rgba(232, 164, 184, 0.3);
+}
+
+.memory-card.matched .card-back {
+    background: linear-gradient(135deg, var(--accent-gold), #ffb300);
+    border-color: var(--accent-gold-soft);
+    box-shadow: 0 0 25px rgba(255, 213, 79, 0.5);
+}
+
+/* Game Win State */
+.game-win {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 22, 40, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-slow);
+}
+
+.game-win.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.game-win.hidden {
+    display: none;
+}
+
+.win-content {
+    text-align: center;
+    animation: celebration-pop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.win-hearts {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-md);
+    animation: heart-dance 0.5s ease infinite alternate;
+}
+
+.win-title {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    color: var(--accent-gold);
+    margin-bottom: var(--spacing-md);
+    text-shadow: 0 0 30px var(--star-glow);
+}
+
+.win-message {
+    font-size: 1.2rem;
+    color: var(--accent-rose-soft);
+    margin-bottom: var(--spacing-xl);
+    font-style: italic;
+}
+
+/* Game Footer */
+.game-footer {
+    margin-top: var(--spacing-md);
+}
+
+.game-love-note {
+    font-family: var(--font-poem);
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* Celebration Game Button */
+.celebration-game-btn {
+    margin-top: var(--spacing-lg);
+    animation: gentle-float 2s ease-in-out infinite;
+}
+
+/* ===================================
+   REDUCED MOTION SUPPORT
+   =================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
