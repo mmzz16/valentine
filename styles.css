@@ -754,17 +754,12 @@ body {
     }
 
     .memory-game {
-        gap: 6px !important;
-        max-width: 320px !important;
+        gap: 8px !important;
     }
 
     .memory-card {
-        width: 45px !important;
-        height: 45px !important;
-    }
-
-    .card-face {
-        font-size: 1.3rem !important;
+        width: 70px !important;
+        height: 70px !important;
     }
 }
 
@@ -810,16 +805,16 @@ body {
 /* Memory Game Grid */
 .memory-game {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 10px;
-    max-width: 450px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    max-width: 380px;
     margin: 0 auto var(--spacing-lg);
 }
 
 /* Memory Card */
 .memory-card {
-    width: 65px;
-    height: 65px;
+    width: 80px;
+    height: 80px;
     position: relative;
     cursor: pointer;
     transform-style: preserve-3d;
