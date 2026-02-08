@@ -429,7 +429,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // LOVE MEMORY MATCH GAME
 // ===================================
 
-const gameEmojis = ['💖', '💕', '🌹', '✨', '💫', '🦋', '🎀', '🌸', '🌻'];
+const allEmojis = ['💖', '💕', '🌹', '✨', '💫', '🦋', '🎀', '🌸', '🌻'];
+const PAIRS_COUNT = 6;
 let cards = [];
 let flippedCards = [];
 let matchedPairs = 0;
@@ -440,8 +441,12 @@ function initGame() {
     const gameContainer = document.getElementById('memory-game');
     if (!gameContainer) return;
 
+    // Randomly select 6 emojis from the pool of 9
+    const shuffledEmojis = [...allEmojis].sort(() => Math.random() - 0.5);
+    const selectedEmojis = shuffledEmojis.slice(0, PAIRS_COUNT);
+
     // Create pairs of cards
-    const cardPairs = [...gameEmojis, ...gameEmojis];
+    const cardPairs = [...selectedEmojis, ...selectedEmojis];
 
     // Shuffle cards
     cards = cardPairs.sort(() => Math.random() - 0.5);
@@ -535,7 +540,7 @@ function checkMatch() {
             canFlip = true;
 
             // Check win condition
-            if (matchedPairs === gameEmojis.length) {
+            if (matchedPairs === PAIRS_COUNT) {
                 setTimeout(showWin, 500);
             }
         }, 300);
