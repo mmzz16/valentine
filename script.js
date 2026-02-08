@@ -135,7 +135,7 @@ class StarryNight {
 // CLICK SPARKLES
 // ===================================
 
-const sparkleEmojis = ['✨', '💫', '⭐', '💖', '💕', '🌟', '💗'];
+const sparkleEmojis = ['✨', '💫', '⭐', '💖', '💕', '🌟', '💗', '🎀'];
 
 function createSparkle(x, y) {
     const container = document.getElementById('sparkles-container');
@@ -587,3 +587,4 @@ goToPage = function (pageId) {
 window.goToPage = goToPage;
 window.sayYes = sayYes;
 window.resetGame = resetGame;
+
