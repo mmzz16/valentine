@@ -579,11 +579,233 @@ function resetGame() {
     initGame();
 }
 
-// Initialize game when going to game page
+// ===================================
+// THEME SWITCHER
+// ===================================
+
+function setTheme(theme) {
+    document.body.classList.remove('theme-starry', 'theme-sunrise');
+    document.body.classList.add(`theme-${theme}`);
+    goToPage('anniversary-page');
+}
+
+// ===================================
+// TYPEWRITER EFFECT
+// ===================================
+
+const letterText = `Today feels like a quiet marker in time - a moment to slow down and notice how naturally our lives have learned to move together.
+
+Happy anniversary, my love.
+
+What we share isn't loud or dramatic; it's steady, warm, and deeply real. Being with you has changed the way the world feels to me, like everything carries a little more color, a little more meaning, simply because you're in it.
+
+I think about the beginning often - how nervous I was, how my hands betrayed me before my heart did, spilling tea on our first date while trying to act calm. I remember sitting there, pretending to listen while actually just staring at you, admiring the way you existed so effortlessly in front of me.
+
+That moment still makes me smile, because somehow, even in my clumsiness, something honest started forming. Loving you didn't happen all at once - it unfolded slowly, layer by layer, until staying felt like the only option.
+
+Being with you has taught me what peace really feels like. The way hugging you calms me, how everything inside me settles the moment I'm close to you - it's something I can't explain, only feel.
+
+Your presence quiets the noise in my head. Your smile alone can change the direction of my entire day, like light breaking through when I didn't even realize it was cloudy.
+
+I love you in the simplest, most human ways. I love kissing you, stealing moments when the world isn't watching. I love taking pictures of you - even though you don't like most of them - because to me, every one of them holds something I don't want to forget.
+
+They're all my favorite. Each photo feels like proof of how beautiful you are, not just to look at, but to love.
+
+What makes us special to me is how grounded we are. Our love isn't about perfection; it's about effort, honesty, and choosing each other on ordinary days.
+
+So today, I'm celebrating us - the memories we've created, the comfort we've found in each other, the quiet strength of what we're building.
+
+I choose you, clearly and intentionally, today and every day that follows.
+
+I love you so much my ውዲቱ ❤️
+Always 💕`;
+
+let typewriterIndex = 0;
+let typewriterTimeout = null;
+
+function startTypewriter() {
+    const textElement = document.getElementById('typewriter-text');
+    const cursor = document.querySelector('.letter-cursor');
+    const continueBtn = document.getElementById('anniversary-continue');
+
+    if (!textElement) return;
+
+    typewriterIndex = 0;
+    textElement.textContent = '';
+
+    function type() {
+        if (typewriterIndex < letterText.length) {
+            textElement.textContent += letterText.charAt(typewriterIndex);
+            typewriterIndex++;
+
+            // Variable speed for natural feel
+            let delay = 20;
+            const char = letterText.charAt(typewriterIndex - 1);
+            if (char === '.' || char === '!' || char === '?') delay = 300;
+            else if (char === ',') delay = 150;
+            else if (char === '\n') delay = 200;
+
+            typewriterTimeout = setTimeout(type, delay);
+        } else {
+            // Typing complete
+            if (cursor) cursor.style.display = 'none';
+            if (continueBtn) {
+                continueBtn.style.display = 'inline-flex';
+                continueBtn.classList.add('fade-in');
+            }
+        }
+    }
+
+    type();
+}
+
+// ===================================
+// PHOTO CAROUSEL
+// ===================================
+
+const allPhotos = ['img.jpg', 'img2.jpg', 'img3.jpg', 'img4.jpg', 'img5.jpg', 'img6.jpg', 'img7.jpg', 'img8.jpg', 'img9.jpg', 'img10.jpg'];
+let shuffledPhotos = [];
+let currentPhotoIndex = 0;
+
+function initCarousel() {
+    const slide = document.getElementById('carousel-slide');
+    const dotsContainer = document.getElementById('carousel-dots');
+
+    if (!slide || !dotsContainer) return;
+
+    // Shuffle photos randomly
+    shuffledPhotos = [...allPhotos].sort(() => Math.random() - 0.5);
+
+    // Clear and add images
+    slide.innerHTML = '';
+    dotsContainer.innerHTML = '';
+
+    shuffledPhotos.forEach((photo, index) => {
+        const img = document.createElement('img');
+        img.src = photo;
+        img.alt = `Memory ${index + 1}`;
+        slide.appendChild(img);
+
+        const dot = document.createElement('div');
+        dot.className = `carousel-dot${index === 0 ? ' active' : ''}`;
+        dot.onclick = () => goToPhoto(index);
+        dotsContainer.appendChild(dot);
+    });
+
+    currentPhotoIndex = 0;
+    updateCarousel();
+}
+
+function updateCarousel() {
+    const slide = document.getElementById('carousel-slide');
+    const dots = document.querySelectorAll('.carousel-dot');
+
+    if (slide) {
+        slide.style.transform = `translateX(-${currentPhotoIndex * 100}%)`;
+    }
+
+    dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentPhotoIndex);
+    });
+}
+
+function nextPhoto() {
+    currentPhotoIndex = (currentPhotoIndex + 1) % shuffledPhotos.length;
+    updateCarousel();
+    createSparkle(window.innerWidth / 2, window.innerHeight / 2);
+}
+
+function prevPhoto() {
+    currentPhotoIndex = (currentPhotoIndex - 1 + shuffledPhotos.length) % shuffledPhotos.length;
+    updateCarousel();
+    createSparkle(window.innerWidth / 2, window.innerHeight / 2);
+}
+
+function goToPhoto(index) {
+    currentPhotoIndex = index;
+    updateCarousel();
+}
+
+// ===================================
+// REASONS I LOVE YOU
+// ===================================
+
+const reasons = [
+    { emoji: '🌸', text: 'Your gentle kindness' },
+    { emoji: '💖', text: 'Your pure heart' },
+    { emoji: '✨', text: 'Your beautiful mind' },
+    { emoji: '🌊', text: 'Your calm presence' },
+    { emoji: '👀', text: 'Your sparkly eyes' },
+    { emoji: '🤗', text: 'Your loving touch' },
+    { emoji: '🎵', text: 'Your tender voice' },
+    { emoji: '🌟', text: 'Your radiant face' },
+    { emoji: '😊', text: 'Your killer smile' },
+    { emoji: '💫', text: 'Your dreamy stare' },
+    { emoji: '🫂', text: 'Your cozy hugs' }
+];
+
+let reasonsShown = 0;
+
+function initReasons() {
+    const list = document.getElementById('reasons-list');
+    const continueBtn = document.getElementById('reasons-continue');
+
+    if (!list) return;
+
+    list.innerHTML = '';
+    reasonsShown = 0;
+
+    if (continueBtn) continueBtn.style.display = 'none';
+
+    reasons.forEach((reason, index) => {
+        const item = document.createElement('div');
+        item.className = 'reason-item';
+        item.innerHTML = `
+            <span class="reason-emoji">${reason.emoji}</span>
+            <span class="reason-text">${reason.text}</span>
+        `;
+        list.appendChild(item);
+    });
+
+    // Animate reasons one by one
+    showNextReason();
+}
+
+function showNextReason() {
+    const items = document.querySelectorAll('.reason-item');
+    const continueBtn = document.getElementById('reasons-continue');
+
+    if (reasonsShown < items.length) {
+        items[reasonsShown].classList.add('visible');
+        createSparkle(
+            window.innerWidth / 2 + (Math.random() - 0.5) * 100,
+            150 + reasonsShown * 50
+        );
+        reasonsShown++;
+        setTimeout(showNextReason, 400);
+    } else {
+        // All reasons shown
+        if (continueBtn) {
+            continueBtn.style.display = 'inline-flex';
+            continueBtn.classList.add('fade-in');
+        }
+    }
+}
+
+// ===================================
+// ENHANCED PAGE NAVIGATION
+// ===================================
+
 const originalGoToPage = goToPage;
 goToPage = function (pageId) {
     originalGoToPage(pageId);
-    if (pageId === 'game-page') {
+
+    // Page-specific initializations
+    if (pageId === 'gallery-page') {
+        setTimeout(initCarousel, 300);
+    } else if (pageId === 'reasons-page') {
+        setTimeout(initReasons, 300);
+    } else if (pageId === 'game-page') {
         setTimeout(initGame, 500);
     }
 };
@@ -592,3 +814,6 @@ goToPage = function (pageId) {
 window.goToPage = goToPage;
 window.sayYes = sayYes;
 window.resetGame = resetGame;
+window.nextPhoto = nextPhoto;
+window.prevPhoto = prevPhoto;
+
