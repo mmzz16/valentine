@@ -49,6 +49,8 @@
         <!-- Anniversary Page -->
         <section id="anniversary-page" class="page">
             <div class="page-content anniversary-content-long">
+                <button class="back-btn" onclick="goToPage('welcome-page')">← Back</button>
+
                 <div class="anniversary-hearts">💕</div>
                 <h1 class="anniversary-title">Happy Anniversary</h1>
 
@@ -62,8 +64,8 @@
                 <div class="anniversary-message scrollable">
                     <p class="fade-in-line">
                         Today feels like a quiet marker in time - a moment to slow down and notice how naturally our
-                        lives
-                        have learned to move together. Happy anniversary, my love. What we share isn't loud or dramatic;
+                        lives have learned to move together. Happy anniversary, my love. What we share isn't loud or
+                        dramatic;
                         it's steady, warm, and deeply real. Being with you has changed the way the world feels to me,
                         like everything carries a little more color, a little more meaning, simply because you're in it.
                     </p>
@@ -84,8 +86,8 @@
                     <p class="fade-in-line">
                         I love you in the simplest, most human ways. I love kissing you, stealing moments when the world
                         isn't watching. I love taking pictures of you - even though you don't like most of them -
-                        because to
-                        me, every one of them holds something I don't want to forget. They're all my favorite. Each
+                        because to me, every one of them holds something I don't want to forget. They're all my
+                        favorite. Each
                         photo feels like proof of how beautiful you are, not just to look at, but to love.
                     </p>
                     <p class="fade-in-line">
@@ -96,10 +98,10 @@
                     </p>
                     <p class="fade-in-line highlight">
                         So today, I'm celebrating us - the memories we've created, the comfort we've found in each
-                        other,
-                        the quiet strength of what we're building. I'm grateful for you in ways I don't always know how
+                        other, the quiet strength of what we're building. I'm grateful for you in ways I don't always
+                        know how
                         to say. I choose you, clearly and intentionally, today and every day that follows. If love is a
-                        kind of art,then what we have feels like something still being painted - honest, imperfect, and
+                        kind of art, then what we have feels like something still being painted - honest, imperfect, and
                         alive. And if it has a rhythm, it's steady and true, always bringing me back to you.
                     </p>
                     <p class="fade-in-line highlight">
@@ -108,9 +110,58 @@
                     </p>
                 </div>
 
-                <button class="continue-btn" onclick="goToPage('valentine-page')">
+                <button class="continue-btn" onclick="goToPage('gallery-page')">
+                    <span>See Our Memories 📸</span>
+                    <span class="btn-sparkle">💕</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Photo Gallery Page -->
+        <section id="gallery-page" class="page">
+            <div class="page-content gallery-content">
+                <button class="back-btn" onclick="goToPage('anniversary-page')">← Back</button>
+
+                <h1 class="gallery-title">Our Memories 📸</h1>
+                <p class="gallery-subtitle">Swipe through our favorite moments</p>
+
+                <div class="carousel-container">
+                    <button class="carousel-btn carousel-prev" onclick="prevPhoto()">❮</button>
+                    <div class="carousel-wrapper">
+                        <div class="carousel-slide" id="carousel-slide">
+                            <!-- Photos will be loaded by JavaScript -->
+                        </div>
+                    </div>
+                    <button class="carousel-btn carousel-next" onclick="nextPhoto()">❯</button>
+                </div>
+
+                <div class="carousel-dots" id="carousel-dots">
+                    <!-- Dots will be generated -->
+                </div>
+
+                <button class="continue-btn" onclick="goToPage('reasons-page')">
+                    <span>Want to know why I love you? 💕</span>
+                    <span class="btn-sparkle">✨</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Reasons I Love You Page -->
+        <section id="reasons-page" class="page">
+            <div class="page-content reasons-content">
+                <button class="back-btn" onclick="goToPage('gallery-page')">← Back</button>
+
+                <h1 class="reasons-title">Why I Love You 💕</h1>
+                <p class="reasons-intro">This is going to be a long list...</p>
+
+                <div class="reasons-list" id="reasons-list">
+                    <!-- Reasons will be animated in by JavaScript -->
+                </div>
+
+                <button class="continue-btn" onclick="goToPage('valentine-page')" id="reasons-continue"
+                    style="display: none;">
                     <span>One more thing...</span>
-                    <span class="btn-sparkle">�</span>
+                    <span class="btn-sparkle">💝</span>
                 </button>
             </div>
         </section>
@@ -118,6 +169,8 @@
         <!-- Valentine Page -->
         <section id="valentine-page" class="page">
             <div class="page-content valentine-content">
+                <button class="back-btn" onclick="goToPage('reasons-page')">← Back</button>
+
                 <div id="valentine-question" class="valentine-question-container">
                     <div class="valentine-heart">💖</div>
                     <h1 class="valentine-title">Will you be my Valentine?</h1>
@@ -146,7 +199,7 @@
                         </p>
                         <button class="continue-btn celebration-game-btn" onclick="goToPage('game-page')">
                             <span>Let's play a game! 🎮</span>
-                            <span class="btn-sparkle">�</span>
+                            <span class="btn-sparkle">💕</span>
                         </button>
                     </div>
                 </div>
@@ -156,7 +209,9 @@
         <!-- Game Page - Love Memory Match -->
         <section id="game-page" class="page">
             <div class="page-content game-content">
-                <h1 class="game-title">Love Memory Match �</h1>
+                <button class="back-btn" onclick="goToPage('valentine-page')">← Back</button>
+
+                <h1 class="game-title">Love Memory Match 💕</h1>
                 <p class="game-subtitle">Find all the matching pairs!</p>
 
                 <div class="game-stats">
@@ -173,6 +228,18 @@
                         <div class="win-hearts">💖✨💕✨💖</div>
                         <h2 class="win-title">You did it! 🎉</h2>
                         <p class="win-message">Just like finding matches in this game, we found each other 💕</p>
+
+                        <!-- Voice Message -->
+                        <div class="voice-message-container">
+                            <p class="voice-intro">I have something to say to you... 🎤</p>
+                            <audio id="voice-message" controls>
+                                <source src="voicemessage.ogg" type="audio/ogg">
+                                <source src="voicemessage.mp3" type="audio/mpeg">
+                                <source src="voicemessage.m4a" type="audio/mp4">
+                                Your browser does not support audio.
+                            </audio>
+                        </div>
+
                         <button class="continue-btn" onclick="resetGame()">
                             <span>Play Again</span>
                             <span class="btn-sparkle">🔄</span>
