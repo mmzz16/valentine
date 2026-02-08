@@ -359,7 +359,7 @@ function sayYes() {
 
 function createConfetti() {
     const container = document.getElementById('confetti-container');
-    const confettiEmojis = ['🎉', '💖', '💕', '✨', '💗', '🌟', '💝', '🎊', '💫'];
+    const confettiEmojis = ['🎉', '💖', '💕', '✨', '💗', '🌟', '💝', '🎊', '💫', '🎀', '🌸', '🌻'];
     const colors = ['#ffd54f', '#e8a4b8', '#ff6b6b', '#4ecdc4', '#45b7d1', '#96f2d7'];
 
     for (let i = 0; i < 50; i++) {
@@ -429,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // LOVE MEMORY MATCH GAME
 // ===================================
 
-const gameEmojis = ['💖', '💕', '🌹', '✨', '💫', '🦋'];
+const gameEmojis = ['💖', '💕', '🌹', '✨', '💫', '🦋','🎀', '🌸', '🌻'];
 let cards = [];
 let flippedCards = [];
 let matchedPairs = 0;
@@ -587,4 +587,5 @@ goToPage = function (pageId) {
 window.goToPage = goToPage;
 window.sayYes = sayYes;
 window.resetGame = resetGame;
+
 
